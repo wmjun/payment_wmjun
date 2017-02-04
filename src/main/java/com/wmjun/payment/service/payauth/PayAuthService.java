@@ -14,6 +14,6 @@ public interface PayAuthService {
 
     PayAuthRequest get(Long id);
 
-    PayAuthResponseVO requestPayAuth(PayAuthRequestDTO requestDTO) throws PgSystemException;
+    PayAuthResponseVO auth(PayAuthRequestDTO requestDTO) throws PgSystemException;
 
 }

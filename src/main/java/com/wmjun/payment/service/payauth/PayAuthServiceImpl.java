@@ -46,14 +46,14 @@ public class PayAuthServiceImpl implements PayAuthService {
 
     @Override
     @Transactional(readOnly = false)
-    public PayAuthResponseVO requestPayAuth(PayAuthRequestDTO requestDTO) throws PgSystemException {
+    public PayAuthResponseVO auth(PayAuthRequestDTO requestDTO) throws PgSystemException {
         //TODO PayAuthRequest 데이타 저장 시점은 언제가 좋은가 ? (PG로 인증 요청이 성공 했을 때 저장 / 인증 요청 시도만 해도 저장)
 
         PayAuthRequest payAuthRequest = savePayAuthRequest(requestDTO);
         MockPgAuthResultVO pgAuthResult = pgService.requestAuth();
         PayAuthResponse payAuthResponse = savePayAuthResponse(pgAuthResult, payAuthRequest.getPayAuthRequestId());
 
-        // TODO: 2017. 2. 4. : MockPG에서는 PG 결과 값을 그대로 전달 받았지만, PG사가 여러개일 시 매핑을 통해 PayAuthResponse에 다르게 저장.
+        // TODO: 2017. 2. 4. : MockPG에서는 PG 결과 값을 그대로 전달 받았지만, PG 사가 여러개일 시 매핑을 통해 PayAuthResponse에 다르게 저장.
         return new PayAuthResponseVO(payAuthResponse.isSuccess(), payAuthResponse.getCode(), payAuthResponse.getMessage());
 
 
