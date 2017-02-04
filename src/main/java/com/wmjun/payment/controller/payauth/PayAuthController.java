@@ -15,7 +15,7 @@ import java.util.List;
  * Created by wmjun on 2017. 1. 31..
  */
 @RestController
-@RequestMapping("api/pay-auth-requests")
+@RequestMapping("api/pay-auth")
 public class PayAuthController {
 
 
@@ -33,9 +33,10 @@ public class PayAuthController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public PayAuthResponseDTO requestAuth(@RequestBody PayAuthRequestDTO payAuthRequestDTO) {
+    public PayAuthResponseDTO auth(@RequestBody PayAuthRequestDTO payAuthRequestDTO) {
         try {
-            final PayAuthResponseVO result = payAuthService.requestPayAuth(payAuthRequestDTO);
+            final PayAuthResponseVO result = payAuthService.auth(payAuthRequestDTO);
+
             return new PayAuthResponseDTO(result.isSuccess(), result.getCode(), result.getMessage());
         } catch (PgSystemException e) {
             return new PayAuthResponseDTO(false, PgService.PG_SYSTEM_ERROR_CODE, PgService.PG_SYSTEM_ERROR_MSG);
