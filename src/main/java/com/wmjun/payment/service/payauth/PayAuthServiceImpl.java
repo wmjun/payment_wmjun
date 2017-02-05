@@ -53,7 +53,7 @@ public class PayAuthServiceImpl implements PayAuthService {
         MockPgAuthResultVO pgAuthResult = pgService.requestAuth();
         PayAuthResponse payAuthResponse = savePayAuthResponse(pgAuthResult, payAuthRequest.getPayAuthRequestId());
 
-        // TODO: 2017. 2. 4. : MockPG에서는 PG 결과 값을 그대로 전달 받았지만, PG 사가 여러개일 시 매핑을 통해 PayAuthResponse에 다르게 저장.
+        // TODO: 2017. 2. 4. : MockPG 에서는 PG 결과 값을 그대로 전달 받았지만, PG 사가 여러개일 시 매핑을 통해 PayAuthResponse에 다르게 저장.
         return new PayAuthResponseVO(payAuthResponse.isSuccess(), payAuthResponse.getCode(), payAuthResponse.getMessage());
 
 

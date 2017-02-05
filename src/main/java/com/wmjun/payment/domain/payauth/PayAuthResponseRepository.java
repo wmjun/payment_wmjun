@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PayAuthResponseRepository extends JpaRepository<PayAuthResponse, Long> {
+
+    PayAuthResponse findByPayAuthRequestId(Long payAuthRequestId);
 }
